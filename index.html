@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Galeria de Artes - TAGI.</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #aaa;
+}
+
+input[name="grupo"]{
+    display: none;
+}
+
+input[name="grupo"]:checked + label img{
+    opacity: .9;
+}
+</style>
+
+</head>
+
+<body>
+
+    div id="container">
+        <input type="radio" id="foto1" name="grupo" checked>
+        <label  for="foto1"><img src="1.png"></label>
+        <input type="radio" id="foto2" name="grupo">
+        <label  for="foto2"><img src="2.png"></label>
+        <input type="radio" id="foto3" name="grupo">
+        <label  for="foto3"><img src="3.png"></label>
+        <input type="radio" id="foto4" name="grupo">
+        <label  for="foto4"><img src="4.png"></label>
+        <div class="principal">
+            <div class="slide">
+                <img scr="1.png">
+                <img scr="2.png">
+                <img scr="3.png">
+                <img scr="4.png">
+            </div>
+
+</body>
+</html>
