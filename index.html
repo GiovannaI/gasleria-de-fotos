@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Galeria de Artes - TAGI.</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ca14b9e588.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="slide.css">
+    <title>Galeria de Artes - TAGI.</title>
 
 <style>
 
-*{
-    margin: 0;
-    padding: 0;
-}
 body{
     background: #aaa;
+}
+
+#foto0:checked ~ .principal .slide{
+    margin-left: -100%;
+}
+
+#foto1:checked ~ .principal .slide{
+    margin-left: -200%;
+}
+
+#foto2:checked ~ .principal .slide{
+    margin-left: -300%;
+}
+
+#foto3:checked ~ .principal .slide{
+    margin-left: -400%;
 }
 
 input[name="grupo"]{
@@ -21,28 +37,114 @@ input[name="grupo"]{
 input[name="grupo"]:checked + label img{
     opacity: .9;
 }
+
 </style>
 
 </head>
-
 <body>
 
-    div id="container">
-        <input type="radio" id="foto1" name="grupo" checked>
-        <label  for="foto1"><img src="1.png"></label>
-        <input type="radio" id="foto2" name="grupo">
-        <label  for="foto2"><img src="2.png"></label>
-        <input type="radio" id="foto3" name="grupo">
-        <label  for="foto3"><img src="3.png"></label>
-        <input type="radio" id="foto4" name="grupo">
-        <label  for="foto4"><img src="4.png"></label>
-        <div class="principal">
-            <div class="slide">
-                <img scr="1.png">
-                <img scr="2.png">
-                <img scr="3.png">
-                <img scr="4.png">
+<div id="container">
+<input type="radio" id="foto0" name="grupo" checked>
+<label for="foto0"><img src="0.png"></label>
+<input type="radio" id="foto1" name="grupo">
+<label for="foto1"><img src="1.png"></label>
+<input type="radio" id="foto2" name="grupo">
+<label for="foto2"><img src="2.png"></label>
+<input type="radio" id="foto3" name="grupo">
+<label for="foto3"><img src="3.png"></label>
+    <div class="principal">
+        <div class="slide">
+            <img src="0.png">
+            <img src="1.png">
+            <img src="2.png">
+            <img src="3.png">
+        </div>
+    </div>
+</div>
+
+    <div class="slide">
+        <div class="slides">
+
+            <div id="voltar" class="btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div id="next" class="btn">
+                <i class="fas fa-chevron-right"></i>
             </div>
 
+            <div id="atual" class="image">
+                <img src="0.png" alt="">
+            </div>
+            <div class="image">
+                <img src="1.png" alt="">
+        </div>
+            <div class="image">
+                <img src="2.png" alt="">
+    </div>
+            <div class="image">
+                <img src="3.png" alt="">
+            </div>
+        </div>
+        <div class="balls">
+           </div>
+    </div>
 </body>
+<script>
+    var balls = document.querySelector('.balls')
+    var quant = document.querySelectorAll('.slides .image')
+    var atual = 0
+    var imagem = document.getElementById('atual')
+    var next = document.getElementById('next')
+    var voltar = document.getElementById('voltar')
+    var rolar = true
+
+    for(let i=0; i < quant.length; i++){
+        var div = document.createElement('div')
+        div.id = i
+        balls.appendChild(div)
+    }
+    document.getElementById('0').classList.add('imgAtual')
+
+    var pos = document.querySelectorAll('.balls div')
+
+    for(let i=0; i< pos.length; i++){
+        pos[i].addEventListener('click', ()=>{
+            atual = pos[i].id
+            rolar = false
+            slide()
+        })
+    }
+
+    voltar.addEventListener('click', ()=>{
+        atual--
+        rolar = false
+        slide()
+    })
+    next.addEventListener('click', ()=>{
+        atual++
+        rolar = false
+        slide()
+    })
+
+    function slide(){
+        if(atual >= quant.length){
+            atual = 0
+        }
+        else if(atual <0){
+            atual = quant.length-1
+        }
+        document.querySelector('.imgAtual').classList.remove('imgAtual')
+        imagem.style.marginLeft = -1024*atual+'px'
+        document.getElementById(atual).classList.add('imgAtual')
+    }
+    setInterval(()=>{
+        if(rolar){
+            atual++
+            slide()
+        }
+        else{
+            rolar = true
+        }
+    },4000)
+</script>
 </html>
